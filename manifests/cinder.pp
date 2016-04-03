@@ -6,7 +6,7 @@
 #   Defaults to 'iscsi'.
 #
 class openstack_integration::cinder (
-  $backend = 'iscsi',
+  $backend = 'nfs',
 ) {
 
   include ::openstack_integration::config
@@ -84,6 +84,11 @@ class openstack_integration::cinder (
       # make sure ceph pool exists before running Cinder API & Volume
       Exec['create-cinder'] -> Service['cinder-api']
       Exec['create-cinder'] -> Service['cinder-volume']
+    }
+    'nfs': {
+      cinder::backend::nfs { 'BACKEND_1':
+        nfs_shares => '127.0.0.1:/primary/cinder',
+      }
     }
     default: {
       fail("Unsupported backend (${backend})")

@@ -94,7 +94,7 @@ class openstack_integration::nova (
     instance_usage_audit_period => 'hour',
   }
   class { '::nova::compute::libvirt':
-    libvirt_virt_type => 'qemu',
+    libvirt_virt_type => 'kvm',
     migration_support => true,
     vncserver_listen  => '0.0.0.0',
   }

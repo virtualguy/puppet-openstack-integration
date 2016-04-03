@@ -47,7 +47,7 @@ EOF
 #
 # - ``SCRIPT_DIR`` must be set to script path
 install_all() {
-  PUPPETFILE=${SCRIPT_DIR}/Puppetfile r10k puppetfile install -v
+  PUPPETFILE=${SCRIPT_DIR}/Puppetfile ${GEM_BIN_DIR}r10k puppetfile install -v
 }
 
 # Install Puppet OpenStack modules and dependencies by using
@@ -84,5 +84,6 @@ is_fedora() {
 uses_debs() {
     # check if apt-get is installed, valid for debian based
     type "apt-get" 2>/dev/null
+    return 1
 }
 
